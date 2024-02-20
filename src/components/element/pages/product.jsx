@@ -3,7 +3,7 @@ import { getProducts } from "../../services/products.service";
 import Button from "../Button/Button";
 import CardProduct from "../fragment/cardProduct";
 
-const email = localStorage.getItem('email');
+const email = localStorage.getItem('token');
 
 const ProductPage = () => {
     const [cart, setCart] = useState([]);
@@ -67,6 +67,7 @@ const ProductPage = () => {
                                     id={product.id}
                                     handleAddToCart={handleAddToCart}
                                 />
+                                <hr className="w-full" />
                             </CardProduct>
                         ))}
                     </div>
@@ -85,18 +86,20 @@ const ProductPage = () => {
                                 {products.length > 0 && cart.map(item => {
                                     const product = products.find(product => product.id === item.id);
                                     return (
-                                        <tr key={item.id}>
-                                            <td className="font-bold">{product.title}</td>
+                                        <tr key={item.id} >
+                                            <td className="font-bold">{product.title.substring(0, 20)}</td>
                                             <td>{product.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
                                             <td>{item.qty}</td>
                                             <td>{(item.qty * product.price).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
                                         </tr>
+                                   
                                     );
                                 })}
                                 <tr>
                                     <td colSpan={3} className="bg-black text-white p-1 rounded"><b>Total price </b></td>
                                     <td className="bg-black text-white p-1 rounded"><b>{totalPrice?.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</b></td>
                                 </tr>
+                                
                             </tbody>
                         </table>
                     </div>

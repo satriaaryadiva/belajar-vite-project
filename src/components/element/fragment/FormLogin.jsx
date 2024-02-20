@@ -5,7 +5,11 @@ import { Login } from "../../services/auth.service";
 const  FormLogin= () =>{
     
 
-const  handleSubmit=(e)=>{
+
+
+
+
+const  handleLogin=(e)=>{
     
     e.preventDefault();
     const  data = {
@@ -14,9 +18,10 @@ const  handleSubmit=(e)=>{
     }
 Login(data,(status,res) =>{
     if(status){
-        localStorage.setItem('email',data);
+        localStorage.setItem('token',res);
     }else{
-        alert(res.response.message);
+       console.log(res.response.data);
+       
     }
 })
 }
@@ -24,8 +29,10 @@ Login(data,(status,res) =>{
 return (
     
 
-    <form  onSubmit={handleSubmit} >
+    <form  onSubmit={handleLogin} >
+   {/* {loginFailed && <p className="text-red-500"> test</p>} */}
     <InputForm
+
     label='Username'  
     type='text' 
     placeholder='example@gmail.com ' 
