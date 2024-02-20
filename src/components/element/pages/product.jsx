@@ -7,7 +7,7 @@ const email = localStorage.getItem('email');
 
 const ProductPage = () => {
     const [cart, setCart] = useState([]);
-    const [totalPrice, setTotalPrice] = useState();ds
+    const [totalPrice, setTotalPrice] = useState();
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
