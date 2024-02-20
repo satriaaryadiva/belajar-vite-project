@@ -6,6 +6,8 @@ const  ErrorPage=()=>{
     return (<>
     <h1>halo ada yang error nih</h1>
         <p>{error.statustext||error.message}</p>
+        <p>{error.stack}</p>
+
         </>
         )
 
