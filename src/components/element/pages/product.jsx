@@ -3,7 +3,7 @@ import { getProducts } from "../../services/products.service";
 import Button from "../Button/Button";
 import CardProduct from "../fragment/cardProduct";
 
-const email = localStorage.getItem('token');
+const token = localStorage.getItem('token');
 
 const ProductPage = () => {
     const [cart, setCart] = useState([]);
@@ -53,7 +53,7 @@ const ProductPage = () => {
         <Fragment>
             <div className="bg-gray-900">
                 <div className="nav flex w-full justify-end p-3 text-center bg-purple-800 text-white">
-                    {email}
+                    {token}
                     <Button onClick={handleLogout} className="bg-black text-white ml-4" type="submit">Logout</Button>
                 </div>
                 <div className="flex justify-center py-5">

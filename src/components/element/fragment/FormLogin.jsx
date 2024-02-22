@@ -21,25 +21,18 @@ const  handleLogin=(e)=>{
 Login(data,(status,res) =>{
     if(status){
         localStorage.setItem('token',res);
+        window.location.href = '/product'
     }else{
-        setLoginFailed(res.response.data);
-       console.log(res.response.data);
-       
+        setLoginFailed(res.response.data);       
     }
 })
 }
 
 return (
 
-    <form  onSubmit={handleLogin} >
-   {loginFailed && <div role="alert" className="rounded border-s-4 border-red-500 bg-red-50 p-4">
-  <strong className="block font-medium text-red-800"> Something went wrong </strong>
-
-  <p className="mt-2 text-sm text-red-700">
-   id dan password anda salah
-  </p>
-</div> }
-    <InputForm
+    <form  onSubmit={handleLogin}>
+  {loginFailed && <p className="text-red-500"> cant login</p>}
+      <InputForm
 
     label='Username'  
     type='text' 
