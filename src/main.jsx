@@ -7,6 +7,7 @@ import ErrorPage from './components/element/pages/eror.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LoginPage from './components/element/pages/login.jsx';
 import RegisterPage from './components/element/pages/Register.jsx';
+import ProfilPage from './components/element/pages/profil.jsx';
 
 const  router =createBrowserRouter([
   {
@@ -28,8 +29,11 @@ element: <LoginPage></LoginPage>
 path:'/register',
 element:<RegisterPage/>,
 errorElement:<ErrorPage/>
-},
-])
+},{
+  path:'/profil',
+  element:<ProfilPage/>,
+  errorElement:<ErrorPage/>
+}])
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

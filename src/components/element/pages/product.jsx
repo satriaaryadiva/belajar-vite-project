@@ -2,18 +2,14 @@ import { Fragment, useEffect, useState } from "react";
 import { getProducts } from "../../services/products.service";
 import Button from "../Button/Button";
 import CardProduct from "../fragment/cardProduct";
-import { getusername } from "../../services/decode.service";
-const token = localStorage.getItem('token');
+import useLogin from "../../../hooks/useLogin";
 
 const ProductPage = () => {
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState();
     const [products, setProducts] = useState([]);
-    const [userName, setuserName] =useState('')
 
-useEffect(() => {
-    setuserName(getusername(token))
-},[])
+const  username =useLogin();
 
     useEffect(() => {
         if (cart.length > 0) {
@@ -58,11 +54,11 @@ useEffect(() => {
         <Fragment>
             <div className="bg-gray-900">
                 <div className="nav flex w-full justify-end p-3 text-center bg-purple-800 text-white">
-                    {userName}
+                    {username}
                     <Button onClick={handleLogout} className="bg-black text-white ml-4" type="submit">Logout</Button>
                 </div>
                 <div className="flex justify-center py-5">
-                    <div className="w-2/3 flex flex-wrap">
+                    <div className=" w-4/5 flex flex-wrap flex-1 ">
                         {products.length > 0 && products.map(product => (
                             <CardProduct key={product.id}>
                                 <CardProduct.Header image={product.image} />
@@ -78,7 +74,7 @@ useEffect(() => {
                     </div>
                     <div className="w-min bg-purple-500 h-max p-4 rounded flex flex-wrap">
                         <h1 className="text-3xl font-bold text-white">Keranjang</h1>
-                        <table className="table-auto to flexv border-separate border-spacing-x-5 flex-wrap" cellPadding={10}>
+                        <table className=" table-auto flex border-separate border-spacing-x-5 flex-wrap" cellPadding={9}>
                             <thead>
                                 <tr>
                                     <th>Product</th>

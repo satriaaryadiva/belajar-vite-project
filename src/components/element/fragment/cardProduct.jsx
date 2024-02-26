@@ -5,7 +5,7 @@ import Button from "../Button/Button"
 const  CardProduct=(props)=>{
 const  { children }=props;
 return(
-    <div className="flex justify-center">
+    <div className="flex justify-center flex-wrap">
                <div className="w-full  max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow mx-2 flex flex-col justify-between my-2">
                {children}
                </div>
@@ -35,7 +35,7 @@ const  {children,title}= props;
                 <a href="">
                     <h5 className=" bg-gray-800 mb-3 text-xl font-semibold tracking-tight text-white">{title}</h5>
                     <p className="text-m text-white"> 
-                    {children.substring(0, 100) } ...lihat selengkapnya
+                    {children.substring(0, 50) } ...lihat selengkapnya
                     
                     </p>
                     </a>
