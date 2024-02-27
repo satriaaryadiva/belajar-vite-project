@@ -28,10 +28,9 @@ Login(data,(status,res) =>{
 })
 }
 
-return (
-
-    <form  onSubmit={handleLogin}>
-  {loginFailed && <p className="text-red-500"> cant login</p>}
+return (<>
+<div className="flex justify-center"> {loginFailed && <p className="text-red-500 border-2 border-rose-500"> Wrong ID or Password !!!</p>}</div>
+<form  onSubmit={handleLogin}>
       <InputForm
 
     label='Username'  
@@ -46,15 +45,13 @@ return (
     placeholder='******' 
     name='password'>  </InputForm>
 
-<Button className="bg-blue-600 w-full "
+<Button className="bg-blue-600 w-full animate-pulse"
         type="submit"
         >Login</Button>    
     </form>
 
 
-
-    
-    );
+</>);
 }
 
 export default FormLogin

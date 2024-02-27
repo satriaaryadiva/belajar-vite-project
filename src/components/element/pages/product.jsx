@@ -54,7 +54,7 @@ const  username =useLogin();
         <Fragment>
             <div className="bg-gray-900">
                 <div className="nav flex w-full justify-end p-3 text-center bg-purple-800 text-white">
-                    {username}
+                        <b className="pt-2">{username}</b>
                     <Button onClick={handleLogout} className="bg-black text-white ml-4" type="submit">Logout</Button>
                 </div>
                 <div className="flex justify-center py-5">
