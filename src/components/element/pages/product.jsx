@@ -1,16 +1,18 @@
 import { Fragment, useEffect, useState } from "react";
 import { getProducts } from "../../services/products.service";
-import Button from "../Button/Button";
 import CardProduct from "../fragment/cardProduct";
 import useLogin from "../../../hooks/useLogin";
+import NavbarLayout from "../layout/navbarLayout";
 
 const ProductPage = () => {
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState();
     const [products, setProducts] = useState([]);
 
-const  username =useLogin();
+    const username= useLogin();
 
+
+// ini untuk
     useEffect(() => {
         if (cart.length > 0) {
             localStorage.setItem('cart', JSON.stringify(cart));
@@ -29,7 +31,7 @@ const  username =useLogin();
         getProducts(data => setProducts(data));
     }, []);
 
-    const handleAddToCart = id => {
+   const handleAddToCart = id => {
         if (cart.find(item => item.id === id)) {
             setCart(cart.map(item => (item.id === id ? { ...item, qty: item.qty + 1 } : item)));
             return;
@@ -43,25 +45,17 @@ const  username =useLogin();
         ]);
     };
 
-    const handleLogout = e => {
-        e.preventDefault();
-        localStorage.removeItem('email');
-        localStorage.removeItem('password');
-        window.location.href = "/Login";
-    };
+    
 
     return (
         <Fragment>
-            <div className="bg-gray-900">
-                <div className="nav flex w-full justify-end p-3 text-center bg-purple-800 text-white">
-                        <b className="pt-2">{username}</b>
-                    <Button onClick={handleLogout} className="bg-black text-white ml-4" type="submit">Logout</Button>
-                </div>
+            <div className="bg-gray-900  flex  min-h-screen flex-col">
+                    <NavbarLayout > {username}</NavbarLayout>
                 <div className="flex justify-center py-5">
                     <div className=" w-4/5 flex flex-wrap flex-1 ">
                         {products.length > 0 && products.map(product => (
                             <CardProduct key={product.id}>
-                                <CardProduct.Header image={product.image} />
+                                <CardProduct.Header image={product.image} id={product.id}/>
                                 <CardProduct.Body title={product.title}>{product.description}</CardProduct.Body>
                                 <CardProduct.Footer
                                     price={product.price}
