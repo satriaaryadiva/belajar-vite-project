@@ -16,11 +16,12 @@ const AuthLayout= ({ children, title, type }) => {
         <div className= "mt-4 text-black text-center font-pixel">
           {type === 'login' ? ' dont have an account?  ' : 'already have an account? '}
           <Link
-            to={type === 'login' ? ` /register` : ` /login`}
-            className=" text-white font-bold font-pixel  capitalize"
-          >
-            {type === 'login' ? 'register' : 'login'}
-          </Link>
+    to={type === 'login' ? '/register' : '/login'}
+    className="text-white font-bold font-pixel capitalize"
+>
+    {type === 'login' ? 'register' : 'login'}
+</Link>
+
         </div>
       </div>
     </div>
