@@ -51,7 +51,7 @@ const ProductPage = () => {
         <Fragment>
             <div className="bg-gray-900  flex  min-h-screen flex-col">
                     <NavbarLayout > {username}</NavbarLayout>
-                <div className="flex justify-center py-5">
+                <div className=" pt-20 flex justify-center py-5">
                     <div className=" w-4/5 flex flex-wrap flex-1 ">
                         {products.length > 0 && products.map(product => (
                             <CardProduct key={product.id}>
@@ -66,7 +66,7 @@ const ProductPage = () => {
                             </CardProduct>
                         ))}
                     </div>
-                    <div className="w-min bg-purple-500 h-max p-4 rounded flex flex-wrap">
+                    <div className="w-min   right-2 bg-purple-500 h-max p-4 rounded flex flex-wrap">
                         <h1 className="text-3xl font-bold text-white">Keranjang</h1>
                         <table className=" table-auto flex border-separate border-spacing-x-5 flex-wrap" cellPadding={9}>
                             <thead>

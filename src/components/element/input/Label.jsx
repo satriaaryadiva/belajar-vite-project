@@ -7,7 +7,7 @@ const  Label=(props) =>{
 
 return(
 <label 
-        className='block text-black text-sm font-bold mb-2'>
+        className='block  font-pixel text-black text-sm font-bold mb-2'>
             {children}
         </label>
 )}
