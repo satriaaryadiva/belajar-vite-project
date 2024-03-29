@@ -22,7 +22,8 @@ const  handleProfile= ()=> {
     <Fragment>
     
    
-                <div className="nav  fixed  z-50 flex w-full justify-end p-3 text-center bg-purple-800 text-white  ">
+                <div className="    fixed  z-50 flex w-full justify-end p-3 text-center bg-purple-800 text-white  ">
+                  
                   <Button 
                  
                   className="flex-none w-40 items-center relative p-3 rounded font-semibold hover:bg-purple-950  border-s-black 
