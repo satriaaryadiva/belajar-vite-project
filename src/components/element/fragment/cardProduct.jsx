@@ -52,15 +52,15 @@ const Footer = ({ price, handleAddToCart, id }) => {
     }
 
     return (
-        <div className="flex items-center justify-between px-4 py-4">
+        <div className="flex items-center  justify-between px-4 py-4">
             <span className="text-3xl font-bold text-white">
                 {price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}
             </span>
             <Button
-                className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
+                className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded "
                 onClick={() => handleAddToCart(id)}
             >
-                add to cart
+                add  
             </Button>
         </div>
     );
