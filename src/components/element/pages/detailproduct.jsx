@@ -18,7 +18,7 @@ useEffect(()=>{
         <NavbarLayout/>
          {Object.keys(product).length > 0 && product && (<div className=" bg-gray-950 flex w-100  min-h-screen items-center font-sans justify-center  p-4 ">
         
-        <div className="max-w-xl  flex font-sans justify-center  sm:min-w-min bg-gray-800 mb-3 text-xl font-semibold tracking-tight text-white border-black rounded-lg p-5  hover:shadow-cyan-400 shadow-lg transform hover:-translate-y-1 duration-300 border-t-8 hover:border-t-pink-400 hover:border-t-6 hover:border-r-8 drop-shadow-xl">
+        <div className="max-w-xl  flex  font-sans justify-center  sm:min-w-min bg-gray-800 mb-3 text-xl font-semibold tracking-tight text-white border-black rounded-lg p-5  hover:shadow-cyan-400 shadow-lg transform hover:-translate-y-1 duration-300 border-t-8 hover:border-t-pink-400 hover:border-t-6 hover:border-r-8 drop-shadow-xl">
       <div className="flex-none w-48 relative ">
         <img src={product.image } alt="" className=" rounded-lg absolute inset-0 w-full h-full object-contain" loading="lazy" />
       </div>
@@ -45,8 +45,8 @@ useEffect(()=>{
               Buy now
             </button>
             <button className="h-10 px-6 font-semibold rounded-md border  bg-purple-700
-             text-slate-300  "  type="button">
-              Add to bag
+             text-white"  type="button">
+              Add  
             </button>
           </div>
           <button className="flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300 border border-slate-200 hover:text-pink-500" type="button" aria-label="Like">
