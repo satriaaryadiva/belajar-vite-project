@@ -1,43 +1,35 @@
 import { legacy_createStore } from "redux";
-// reducer 
-const  cartReducer =(
-  state = {
-    cart: [{id:10, qty: 2}],
-  },
-  action  
-  )=>{
+
+//reducdr
+const reducer = (
+  state ={
+    cart : [],
+  } , action) => {
     switch(action.type){
-        case 'ADD_TO_CART':{
-          return{
+      case "ADD_TO_CART":return {
         ...state,
-        cart :[...state.cart, action.payload],
-        };
+        cart : [...state.cart, action.payload]
+      };
+     default : return state}
+
   
-      }    default: return state}
-    }
+}
 
-
-
-///store
-const  store = legacy_createStore(cartReducer);
+//store
+const store = legacy_createStore(reducer);
 console.log(store.getState());
 
-
-
-
-//subcribe
-store.subscribe(() => {
-  console.log('store changed', store.getState());
-})
-
+//subscribe
+store.subscribe(() => console.log(store.getState()));
 
 //dispatch
-const  action1= {
-  type: 'ADD_TO_CART',
-  payload: {
-    id:3,
-    qty: 2
-  }}
+const action1 = {
+  type : "ADD_TO_CART",
+  payload : {
+    id : 1,
+    qty : 1
+  }
+}
 
+store.dispatch(action1)
 
-  store.dispatch(action1)

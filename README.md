@@ -1,1 +1,1 @@
-konsisten, 
+konsisten
