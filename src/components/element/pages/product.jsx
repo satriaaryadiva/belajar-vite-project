@@ -3,47 +3,23 @@ import { getProducts } from "../../services/products.service";
 import CardProduct from "../fragment/cardProduct";
 import useLogin from "../../../hooks/useLogin";
 import NavbarLayout from "../layout/navbarLayout";
-
+import TableCard from "../fragment/TableCard";
 const ProductPage = () => {
-    const [cart, setCart] = useState([]);
-    const [totalPrice, setTotalPrice] = useState();
+    
+ 
     const [products, setProducts] = useState([]);
 
     const username= useLogin();
 
 
-// ini untuk
-    useEffect(() => {
-        if (cart.length > 0) {
-            localStorage.setItem('cart', JSON.stringify(cart));
-        }
-    }, [cart]);
-
-    useEffect(() => {
-        const sum = cart.reduce((acc, item) => {
-            const product = products.find(product => product.id === item.id);
-            return acc + product.price * item.qty;
-        }, 0);
-        setTotalPrice(sum);
-    }, [cart, products]);
+// 
+   
 
     useEffect(() => {
         getProducts(data => setProducts(data));
     }, []);
 
-   const handleAddToCart = id => {
-        if (cart.find(item => item.id === id)) {
-            setCart(cart.map(item => (item.id === id ? { ...item, qty: item.qty + 1 } : item)));
-            return;
-        }
-        setCart([
-            ...cart,
-            {
-                id: id,
-                qty: 1,
-            },
-        ]);
-    };
+   
 
     
 
@@ -61,7 +37,7 @@ const ProductPage = () => {
                                 <CardProduct.Footer
                                     price={product.price}
                                     id={product.id}
-                                    handleAddToCart={handleAddToCart}
+                                    
                                 />
                                 <hr className="w-full" />
                             </CardProduct>
@@ -69,35 +45,7 @@ const ProductPage = () => {
                     </div>
                     <div className="w-min  mx-auto right-2 bg-purple-500 h-max p-4 rounded flex flex-wrap">
                         <h1 className="text-xl font-bold text-white">CART</h1>
-                        <table className=" text-center table-auto flex border-separate     sm:border-spacing-x-5 flex-wrap" cellPadding={9}>
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {products.length > 0 && cart.map(item => {
-                                    const product = products.find(product => product.id === item.id);
-                                    return (
-                                        <tr key={item.id} >
-                                            <td className="font-bold">{product.title.substring(0, 20)}</td>
-                                            <td>{product.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
-                                            <td>{item.qty}</td>
-                                            <td>{(item.qty * product.price).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
-                                        </tr>
-                                   
-                                    );
-                                })}
-                                <tr>
-                                    <td colSpan={3} className="bg-black text-white p-1 rounded"><b>Total price </b></td>
-                                    <td className="bg-black text-white p-1 rounded"><b>{totalPrice?.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</b></td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+                        <TableCard products={products} />
                     </div>
                 </div>
             </div>

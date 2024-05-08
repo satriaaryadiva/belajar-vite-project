@@ -2,6 +2,8 @@
 
 import { Link } from "react-router-dom";
 import Button from "../Button/Button"
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/slices/cartSlice";
 
 const  CardProduct=(props)=>{
 const  { children }=props;
@@ -46,8 +48,10 @@ const  {children,title}= props;
     )
 }
 
-const Footer = ({ price, handleAddToCart, id }) => {
-    if (!price || !handleAddToCart || !id) {
+const Footer = ({ price,  id }) => {
+    const  dispatch= useDispatch();
+
+    if (!price ||  !id) {
         throw new Error('Missing required props');
     }
 
@@ -58,7 +62,7 @@ const Footer = ({ price, handleAddToCart, id }) => {
             </span>
             <Button
                 className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded "
-                onClick={() => handleAddToCart(id)}
+                onClick={()=> dispatch(addToCart({id,qty : 1}))}
             >
                 add  
             </Button>

@@ -9,7 +9,7 @@ const  store=configureStore({
 console.log( `oncreate :`,store.getState() );
 
 store.subscribe(()=>{
-    console.log( `onchange :`,store.getState() )})
+    console.log( `store Change :`,store.getState() )})
 
 
 export default  store
