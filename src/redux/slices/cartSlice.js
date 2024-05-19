@@ -2,9 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
   name: 'cart',
-  initialState: { data: [] }, // Mengubah initialState untuk memiliki array kosong
+  initialState: {     
+    data: JSON.parse(localStorage.getItem('cart'))  || [] }, // Mengubah initialState untuk memiliki array kosong
   reducers: {
     addToCart(state, action) {
+
+      //menambahkan action payload ke dalam cart
         const  itemInCart=state.data.find(
             (item) => item.id === action.payload.id
         );

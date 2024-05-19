@@ -3,6 +3,8 @@ import {  useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { getDetailProduct } from "../../services/products.service";
 import NavbarLayout from "../layout/navbarLayout";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/slices/cartSlice";
 
 const  DetailProduct=()=>{
     const  {id}= useParams();
@@ -12,6 +14,7 @@ useEffect(()=>{
     getDetailProduct(id, data => setProduct(data))
 })
 
+const  dispatch= useDispatch();
 
     return(
         <>
@@ -44,7 +47,7 @@ useEffect(()=>{
             <button className="h-10 px-6 font-semibold rounded-md bg-black text-white" type="submit">
               Buy now
             </button>
-            <button className="h-10 px-6 font-semibold rounded-md border  bg-purple-700
+            <button onClick={()=> dispatch(addToCart({id,qty : 1}))} className="h-10 px-6 font-semibold rounded-md border  bg-purple-700
              text-white"  type="button">
               Add  
             </button>

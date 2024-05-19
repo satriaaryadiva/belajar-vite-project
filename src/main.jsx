@@ -1,8 +1,9 @@
 import React from 'react'
+import DarkModeContextProvider from './context/Darkmode.jsx'
 import ReactDOM from 'react-dom/client'
 import Product from './components/element/pages/product.jsx'
 import './index.css'
-
+import CartDetail from './components/element/fragment/CartDetail.jsx'
 import ErrorPage from './components/element/pages/eror.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LoginPage from './components/element/pages/login.jsx';
@@ -40,6 +41,11 @@ errorElement:<ErrorPage/>
 path:'/detailproduct/:id',
 element:<DetailProduct/>
 
+},
+{
+path:'/test',
+element:<CartDetail/>
+
 }
 
 ])
@@ -48,7 +54,9 @@ element:<DetailProduct/>
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 <Provider store={store}>
-<RouterProvider router={router} />
+ <DarkModeContextProvider>
+<RouterProvider router={router}/>
+</DarkModeContextProvider>
 </Provider>
 
   

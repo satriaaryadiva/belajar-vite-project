@@ -1,9 +1,15 @@
 /* eslint-disable react/prop-types */
+import { DarkMode } from "../../../context/Darkmode";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 const AuthLayout= ({ children, title, type }) => {
+    // eslint-disable-next-line no-unused-vars
+    const  {isDarkmode,setIsDarkmode}=useContext(DarkMode);
 
+    {
+      console(isDarkmode);
+    }
 
-  
   return (
     <div   className=" flex   bg-black justify-center min-h-screen  items-center p-5">
       <div className="   bg-purple-800 text-white p-5 rounded hover:shadow-cyan-400 shadow-lg transform hover:-translate-y-1  duration-300 border-t-8 hover:border-t-pink-400 hover:border-t-6 ">
