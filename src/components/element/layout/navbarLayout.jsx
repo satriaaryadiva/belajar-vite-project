@@ -1,12 +1,10 @@
 /* eslint-disable react/prop-types */
-import { Fragment, useEffect, useState } from "react";
+import  { Fragment, useState, useEffect } from "react";
 import Button from "../Button/Button";
 import useLogin from "../../../hooks/useLogin";
 import { BsPersonCircle, BsDoorOpen, BsCart3 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import TableCard from "../fragment/TableCard";
-
 
 const LogoutConfirmation = ({ onConfirm, onCancel }) => {
   return (
@@ -26,32 +24,15 @@ const LogoutConfirmation = ({ onConfirm, onCancel }) => {
   );
 };
 
-const CartButton = ({ products, onClose }) => {
-  return (
-    <div className="fixed z-100 m-auto   w-screen h-screen bg-purple-400 flex justify-center items-center">
-      <TableCard products={products} />
-      <Button onClick={onClose} className="absolute top-0 right-0 m-4 bg-red-500 hover:bg-red-600 text-white">
-        Close
-      </Button>
-    </div>
-  );
-};
-
-function NavbarLayout() {
+function NavbarLayout({ children }) {
   const username = useLogin();
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-
-  const handleCart = () => {
-    setShowCart(!showCart);
-  };
-
   const handleLogout = () => {
     setShowConfirmation(true);
   };
 
   const confirmLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     window.location.href = "/Login";
   };
 
@@ -59,7 +40,7 @@ function NavbarLayout() {
     setShowConfirmation(false);
   };
 
-  const cart = useSelector((state) => state.cart.data);
+  const cart = useSelector(state => state.cart.data)  ;
   const [totalCart, setTotalCart] = useState(0);
 
   useEffect(() => {
@@ -71,9 +52,9 @@ function NavbarLayout() {
 
   return (
     <Fragment>
-      {showConfirmation && <LogoutConfirmation onConfirm={confirmLogout} onCancel={cancelLogout} />}
-      
-
+      {showConfirmation && (
+        <LogoutConfirmation onConfirm={confirmLogout} onCancel={cancelLogout} />
+      )}
       <div className="h z-50 fixed sm:top-0 flex w-full justify-end p-3 text-center bg-purple-800 text-white">
         <Link to="/profil">
           <Button className="flex-none w-40 items-center relative p-3 rounded font-semibold hover:bg-purple-950 border-s-black">
@@ -81,18 +62,17 @@ function NavbarLayout() {
           </Button>
         </Link>
 
-        <Button className="bg-black text-white ml-4" onClick={handleCart}>
-          <p className="text-white flex flex-row justify-between">
-            {totalCart} <BsCart3 />
-          </p>
+        <Link to ='/product/cart'> 
+        <Button className="bg-black text-white ml-4">
+          <p className="text-white flex flex-row justify-between">{totalCart} <BsCart3 /></p>
         </Button>
+        </Link>
 
         <Button onClick={handleLogout} className="bg-black text-white ml-4" type="button">
           <BsDoorOpen className="text-2xl text-white hover:text-red-500" />
         </Button>
       </div>
-
-      {showCart && <CartButton products={cart} onClose={() => setShowCart(false)} />}
+      {children}
     </Fragment>
   );
 }

@@ -3,7 +3,6 @@ import DarkModeContextProvider from './context/Darkmode.jsx'
 import ReactDOM from 'react-dom/client'
 import Product from './components/element/pages/product.jsx'
 import './index.css'
-import CartDetail from './components/element/fragment/CartDetail.jsx'
 import ErrorPage from './components/element/pages/eror.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LoginPage from './components/element/pages/login.jsx';
@@ -12,6 +11,7 @@ import ProfilPage from './components/element/pages/profil.jsx';
 import DetailProduct from './components/element/pages/detailproduct.jsx'
 import { Provider } from 'react-redux'
 import store from './redux/store'
+import DetailCart from './components/element/pages/DetailCart.jsx'
 
 const  router =createBrowserRouter([
   {
@@ -43,8 +43,8 @@ element:<DetailProduct/>
 
 },
 {
-path:'/test',
-element:<CartDetail/>
+path:'/product/cart',
+element:<DetailCart/>
 
 }
 

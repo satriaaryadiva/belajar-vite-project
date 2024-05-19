@@ -4,6 +4,7 @@ import CardProduct from "../fragment/cardProduct";
 import useLogin from "../../../hooks/useLogin";
 import NavbarLayout from "../layout/navbarLayout";
 import TableCard from "../fragment/TableCard";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
     const [products, setProducts] = useState([]);
@@ -33,7 +34,10 @@ const ProductPage = () => {
                         )}
                     </div>
                     <div className="w-min mx-auto right-2 bg-purple-500 h-max p-4 rounded">
+                        
+                        <Link to ='/product/cart'> 
                         <TableCard products={products} />
+                        </Link>
                     </div>
                 </div>
             </div>
