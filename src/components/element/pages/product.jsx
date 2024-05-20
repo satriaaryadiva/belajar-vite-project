@@ -8,11 +8,22 @@ import { Link } from "react-router-dom";
 
 const ProductPage = () => {
     const [products, setProducts] = useState([]);
+    const [notification, setNotification] = useState(""); // State untuk pesan notifikasi
     const username = useLogin();
 
     useEffect(() => {
         getProducts(data => setProducts(data));
     }, []);
+
+    const handleAddToCart = () => {
+        // Logika penambahan item ke keranjang
+        // Anda dapat menambahkan logika di sini untuk menampilkan notifikasi
+        setNotification("hore Produk anda berhasil ditambahkan ke keranjang");
+        // Hapus notifikasi setelah beberapa detik
+        setTimeout(() => {
+            setNotification("");
+        }, 4000); // 3000 milidetik = 3 detik
+    };
 
     return (
         <Fragment>
@@ -25,8 +36,7 @@ const ProductPage = () => {
                                 <CardProduct key={product.id}>
                                     <CardProduct.Header image={product.image} id={product.id} />
                                     <CardProduct.Body title={product.title}>{product.description}</CardProduct.Body>
-                                    <CardProduct.Footer price={product.price} id={product.id} />
-                                    <hr className="w-full" />
+                                    <CardProduct.Footer price={product.price} id={product.id} handleAddToCart={handleAddToCart} />
                                 </CardProduct>
                             ))
                         ) : (
@@ -34,13 +44,18 @@ const ProductPage = () => {
                         )}
                     </div>
                     <div className="w-min mx-auto right-2 bg-purple-500 h-max p-4 rounded">
-                        
-                        <Link to ='/product/cart'> 
-                        <TableCard products={products} />
+                        <Link to="/product/cart">
+                            <TableCard products={products} />
                         </Link>
                     </div>
                 </div>
             </div>
+            {/* Tampilkan notifikasi */}
+            {notification && (
+                <div className="fixed bottom-5 right-5 bg-green-500 text-black font-bold px-4 py-2 rounded">
+                    {notification}
+                </div>
+            )}
         </Fragment>
     );
 };
