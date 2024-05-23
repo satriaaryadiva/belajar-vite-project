@@ -1,15 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";  
-import cartReducer from "./slices/cartSlice";
+// store.js
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from './slices/cartSlice';
+import cartMiddleware from './slices/cartMiddleware';
 
-const  store=configureStore({
-    reducer : {
-        cart: cartReducer
-    },
-})
-console.log( `oncreate :`,store.getState() );
+const store = configureStore({
+  reducer: {
+    cart: cartReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cartMiddleware),
+});
 
-store.subscribe(()=>{
-    console.log( `store Change :`,store.getState() )})
-
-
-export default  store
+export default store;

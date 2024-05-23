@@ -4,11 +4,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 const AuthLayout= ({ children, title, type }) => {
     // eslint-disable-next-line no-unused-vars
-    const  {isDarkmode,setIsDarkmode}=useContext(DarkMode);
-
-    {
-      console(isDarkmode);
-    }
+   
 
   return (
     <div   className=" flex   bg-black justify-center min-h-screen  items-center p-5">

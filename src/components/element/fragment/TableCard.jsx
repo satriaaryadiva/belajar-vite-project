@@ -1,12 +1,13 @@
-/* eslint-disable react/prop-types */
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { getProducts } from "../../services/products.service";
+import { removeFromCart, addToCart } from "../../../redux/slices/cartSlice";
 
-const TableCard = ( ) => {
+const TableCard = () => {
     const [fetchedProducts, setFetchedProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const cart = useSelector(state => state.cart.data);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         getProducts(data => setFetchedProducts(data));
@@ -25,36 +26,48 @@ const TableCard = ( ) => {
         setTotalPrice(sum);
     }, [cart, fetchedProducts]);
 
+    const handleRemoveFromCart = (productId) => {
+        dispatch(removeFromCart(productId));
+    };
+
+    const handleAddToCart = (productId) => {
+        dispatch(addToCart({ id: productId }));
+    };
+
     return (
-        <div className="table-responsive  ">
-            <table className="text-center table-auto border-collapse w-full">
-                <thead>
-                    <tr>
-                        <th className="px-1 py-1">Product</th>
-                        <th className="px-1 py-1">Price</th>
-                        <th className="px-1 py-1">Quantity</th>
-                        <th className="px-1 py-1">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {cart.map(item => {
-                        const foundProduct = fetchedProducts.find(product => product.id === item.id);
-                        if (!foundProduct || isNaN(foundProduct.price) || isNaN(item.qty)) return null; // Skip if product or price is not valid
-                        return (
-                            <tr key={item.id} className="text-white font-semibold">
-                                <td className="px-1 py-2">{foundProduct.title?.substring(0, 20) || 'N/A'}</td>
-                                <td className="px-1 py-2">{foundProduct.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
-                                <td className="px-1 py-2">{item.qty}</td>
-                                <td className="px-1 py-2">{(item.qty * foundProduct.price).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
-                            </tr>
-                        );
-                    })}
-                    <tr>
-                        <td colSpan={3} className="bg-black text-white p-1 rounded"><b>Total price</b></td>
-                        <td className="bg-black text-white p-1 rounded"><b>{totalPrice.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</b></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div className=" rounded-lg p-4 shadow-md w-full md:max-w-lg bg-gray-800">
+            <div className="font-semibold text-lg mb-4 text-white">Shopping Cart</div>
+            {cart.length > 0 ? (
+                cart.map(item => {
+                    const foundProduct = fetchedProducts.find(product => product.id === item.id);
+                    if (!foundProduct || isNaN(foundProduct.price) || isNaN(item.qty)) return null; // Skip if product or price is not valid
+                    return (
+                        <div key={item.id} className="flex flex-col md:flex-row items-center justify-between border-b bg-gray-800 py-4">
+                            <div className="flex items-center ">
+                                <img src={foundProduct.image} alt={foundProduct.title} className="w-24 h-24 mr-4 rounded-lg" />
+                                <div>
+                                    <div className="font-semibold text-white">{foundProduct.title}</div>
+                                    <div className="text-gray-300">Price: {foundProduct.price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</div>
+                                </div>
+                            </div>
+                            <div className="flex items-center mt-4 md:mt-0">
+                                <div className="mr-2">Quantity: {item.qty}</div>
+                                <div className="font-semibold text-white">{(item.qty * foundProduct.price).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</div>
+                                <div className="flex ml-4">
+                                    <button onClick={() => handleRemoveFromCart(item.id)} className="px-3 py-1 rounded-md bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:bg-red-700 transition duration-300">Remove</button>
+                                    <button onClick={() => handleAddToCart(item.id)} className="px-3 py-1 ml-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 transition duration-300">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })
+            ) : (
+                <div className="text-gray-300 text-center">Your cart is empty.</div>
+            )}
+            <div className="flex justify-between font-semibold mt-4">
+                <div>Total Price:</div>
+                <div className="text-white">{totalPrice.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</div>
+            </div>
         </div>
     );
 }
