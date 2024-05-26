@@ -1,11 +1,7 @@
-// components/layout/NavbarLayout.jsx
-
-
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 
-
-import  { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Button from "../Button/Button";
 import useLogin from "../../../hooks/useLogin";
 import { BsPersonCircle, BsDoorOpen, BsCart3 } from "react-icons/bs";
@@ -60,29 +56,32 @@ function NavbarLayout({ children }) {
       {showConfirmation && (
         <LogoutConfirmation onConfirm={confirmLogout} onCancel={cancelLogout} />
       )}
-      <div className={`fixed z-50 top-0 w-full bg-purple-800 text-white transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="flex justify-end p-3">
-          <Link to="/profil">
-            <Button className="flex-none w-40 items-center relative p-3 rounded font-semibold hover:bg-purple-950 border-s-black text-lg">
-              <BsPersonCircle className="absolute w-8 inset-0 h-full" /> {username}
-            </Button>
-          </Link>
-          <Link to={location.pathname === "/product/cart" ? "/product" : "/product/cart"}>
-            <Button className="flex-none w-fit items-center relative p-3 rounded font-semibold hover:bg-purple-950 border-s-black">
-              <BsCart3 className="absolute w-8 inset-0 h-full" />
+      <div className={`    fixed z-50 top-0 w-full bg-purple-800 text-white transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className="container mx-auto flex justify-between items-center p-4">
+          <div className="flex items-center space-x-4">
+            <Link to="/profil" className="flex items-center">
+              <BsPersonCircle className="text-2xl mr-2" />
+              <span className="text-lg font-semibold">{username}</span>
+            </Link>
+          </div>
+          <div className="flex items-center space-x-4">
+            <Link to={location.pathname === "/product/cart" ? "/product" : "/product/cart"} className="relative flex items-center">
+              <BsCart3 className="text-2xl" />
               {totalCart > 0 && (
                 <span className="absolute top-0 right-0 bg-red-600 rounded-full text-white text-xs w-5 h-5 flex items-center justify-center">
                   {totalCart}
                 </span>
               )}
+            </Link>
+            <Button onClick={handleLogout} className="bg-black text-white p-2 rounded hover:bg-red-700 transition duration-300">
+              <BsDoorOpen className="text-2xl" />
             </Button>
-          </Link>
-          <Button onClick={handleLogout} className="bg-black text-white ml-4" type="button">
-            <BsDoorOpen className="text-2xl text-white hover:text-red-500" />
-          </Button>
+          </div>
         </div>
       </div>
-      {children}
+      <div className="pt-16">
+        {children}
+      </div>
     </Fragment>
   );
 }

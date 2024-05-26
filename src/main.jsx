@@ -1,4 +1,4 @@
-// main.jsx atau index.jsx
+// main.jsx or index.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -13,16 +13,21 @@ import RegisterPage from './components/element/pages/Register.jsx';
 import ProfilPage from './components/element/pages/profil.jsx';
 import DetailProduct from './components/element/pages/detailproduct.jsx';
 import DetailCart from './components/element/pages/DetailCart.jsx';
+import ProtectedRoute from './components/ProtectedRoute';
 import './index.css';
 
 const router = createBrowserRouter([
   {
     path: '/product',
-    element: <Product />,
+    element: (
+      <ProtectedRoute>
+        <Product />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />
   },
   {
-    path: '',
+    path: '/',
     element: <LoginPage />,
     errorElement: <ErrorPage />
   },
@@ -37,16 +42,28 @@ const router = createBrowserRouter([
   },
   {
     path: '/profil',
-    element: <ProfilPage />,
+    element: (
+      <ProtectedRoute>
+        <ProfilPage />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />
   },
   {
     path: '/detailproduct/:id',
-    element: <DetailProduct />
+    element: (
+      <ProtectedRoute>
+        <DetailProduct />
+      </ProtectedRoute>
+    )
   },
   {
     path: '/product/cart',
-    element: <DetailCart />
+    element: (
+      <ProtectedRoute>
+        <DetailCart />
+      </ProtectedRoute>
+    )
   }
 ]);
 
@@ -58,5 +75,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <ToastContainer />
       </DarkModeContextProvider>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
