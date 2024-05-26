@@ -5,36 +5,33 @@ import Button from "../Button/Button";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/slices/cartSlice";
 
-const CardProduct = (props) => {
-  const { children } = props;
+const CardProduct = ({ children }) => {
   return (
     <div className="flex justify-center flex-wrap">
-      <div className="w-full  max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow mx-2 flex flex-col justify-between my-2">
-        {children}
+      <div className="w-full max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow-lg mx-2 flex flex-col justify-between my-4 transition-transform transform hover:scale-105 hover:shadow-2xl">
+        {children }
       </div>
     </div>
   );
 };
 
-const Header = (props) => {
-  const { image, id } = props;
+const Header = ({ image, id }) => {
   return (
     <Link to={`/detailproduct/${id}`}>
-      <img src={image} alt="product" className="p-8 h-60 w-full rounded-t-lg" />
+      <img src={image} alt="product" className="p-4 h-48 w-full object-cover rounded-t-lg transition-transform duration-300 ease-in-out transform hover:scale-105" />
     </Link>
   );
 };
 
-const Body = (props) => {
-  const { children, title } = props;
+const Body = ({ children, title }) => {
   return (
-    <div className="px-5 pb-5 h-full">
-      <a href="">
-        <h5 className="bg-gray-800 mb-3 text-xl font-semibold tracking-tight text-white">{title}</h5>
-        <p className="text-m text-white">
-          {children.substring(0, 50)} ...lihat selengkapnya
+    <div className="px-5 pb-5 flex-grow">
+      <Link to={`/detailproduct/${title}`}>
+        <h5 className="text-xl font-semibold tracking-tight text-white mb-2">{title.substring(0, 20) }</h5>
+        <p className="text-white">
+          {children.substring(0, 50)}... <span className="text-blue-500">lihat selengkapnya</span>
         </p>
-      </a>
+      </Link>
     </div>
   );
 };
@@ -48,31 +45,33 @@ const Footer = ({ price, id, handleAddToCart }) => {
 
   const handleAddClick = () => {
     dispatch(addToCart({ id, qty: 1 }));
-    handleAddToCart(); // Memanggil fungsi handleAddToCart setelah item ditambahkan ke keranjang
+    if (handleAddToCart) {
+      handleAddToCart();
+    }
   };
 
   return (
-    <div className="flex items-center justify-between px-4 py-4">
-      <span className="text-3xl font-bold text-white">
+    <div className="flex items-center justify-between px-5 py-3 bg-gray-900 rounded-b-lg">
+      <span className="text-xl font-bold text-white">
         {price.toLocaleString("id-ID", { style: "currency", currency: "IDR" })}
       </span>
       <Button
-        className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
-        onClick={handleAddClick} // Memanggil handleAddClick saat tombol "Add" ditekan
+        className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded transition-transform duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-2xl"
+        onClick={handleAddClick}
       >
-        add
+        Add
       </Button>
     </div>
   );
 };
 
 const Notif = () => {
-  // Komponen untuk menampilkan notifikasi
+  // Component for displaying notifications
 };
 
 CardProduct.Header = Header;
 CardProduct.Body = Body;
 CardProduct.Footer = Footer;
-CardProduct.Notif = Notif; // Menambahkan fungsi Notif sebagai properti dari CardProduct
+CardProduct.Notif = Notif;
 
 export default CardProduct;
