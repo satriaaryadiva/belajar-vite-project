@@ -1,31 +1,11 @@
+/* eslint-disable react/prop-types */
+ 
+const Button = ({ className, onClick, children }) => {
+  return (
+    <button className={`py-2 px-4 rounded ${className}`} onClick={onClick}>
+      {children}
+    </button>
+  );
+};
 
-
-
-
-const  Button = (props) =>{
-
-   
-    
-
-
-    // eslint-disable-next-line react/prop-types
-    const  {children,className,type="button" ,onClick
-
-} = props;
-    
-    
-    return(
-        <button
-        className={`h-10 px-6 font-semibold rounded-md ${className} text-white`}
-        type={type}
-        onClick={onClick}
-        >
-         {children}
-
-        </button>
-        
-        )
-
-}
-
-export default Button
+export default Button;
