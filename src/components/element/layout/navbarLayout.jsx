@@ -56,7 +56,7 @@ function NavbarLayout({ children }) {
       {showConfirmation && (
         <LogoutConfirmation onConfirm={confirmLogout} onCancel={cancelLogout} />
       )}
-      <div className={`    fixed z-50 top-0 w-full bg-purple-800 text-white transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className={`  border-b-white box-border border-b-2  fixed z-50 top-0 w-full  bg-slate-950 text-white transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="container mx-auto flex justify-between items-center p-4">
           <div className="flex items-center space-x-4">
             <Link to="/profil" className="flex items-center">
