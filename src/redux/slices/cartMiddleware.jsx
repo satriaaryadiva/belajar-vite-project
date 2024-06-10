@@ -5,20 +5,27 @@ import { addToCart, removeFromCart } from '../slices/cartSlice.js';
 
 const cartMiddleware = ( ) => (next) => (action) => {
   if (action.type === addToCart.type) {
-    toast.success('Item added to cart', {
-      position: "top-right",
+    toast.success('Hore Item sudah ditambahkan !!', {
+      position: "bottom-right",
       autoClose: 3000,
       hideProgressBar: false,
-      closeOnClick: true,
+      progressStyle:{color:' green'}
+,      closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      theme:'dark',
+      style:{ border:'white 1px solid',
+      borderRadius:'1rem',
+          
+      },
+      
     });
   }
 
   if (action.type === removeFromCart.type) {
     toast.error('Item removed from cart', {
-      position: "top-right",
+      position: "bottom-right",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
