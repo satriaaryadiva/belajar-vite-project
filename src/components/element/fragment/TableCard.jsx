@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { getProducts } from "../../services/products.service";
-import { removeFromCart, addToCart } from "../../../redux/slices/cartSlice";
+import { removeFromCart,  updateCartQuantity } from "../../../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
 
 const TableCard = () => {
@@ -30,13 +30,25 @@ const TableCard = () => {
         dispatch(removeFromCart(productId));
     };
 
-    const handleAddToCart = (productId) => {
-        dispatch(addToCart({ id: productId }));
+    
+
+    const incrementQuantity = (id) => {
+        const item = cart.find(product => product.id === id);
+        dispatch(updateCartQuantity({ id, qty: item.qty + 1 }));
+    };
+
+    const decrementQuantity = (id) => {
+        const item = cart.find(product => product.id === id);
+        if (item.qty > 1) {
+            dispatch(updateCartQuantity({ id, qty: item.qty - 1 }));
+        } else {
+            dispatch(removeFromCart(id));
+        }
     };
 
     return (
         <div className="rounded-lg shadow-lg p-4 w-full max-w-full md:max-w-3xl bg-gray-800">
-            <div className="text-lg mb-4 bg-inherit bg-purple-800 p-2 font-bold text-white   sticky top-0   text-center ">Shopping Cart</div>
+            <div className="text-lg mb-4 bg-inherit bg-purple-800 p-2 font-bold text-white sticky top-0 text-center">Shopping Cart</div>
             {cart.length > 0 ? (
                 cart.map(item => {
                     const foundProduct = fetchedProducts.find(product => product.id === item.id);
@@ -52,12 +64,13 @@ const TableCard = () => {
                             </div>
                             <div className="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-0">
                                 <div className="flex items-center gap-2">
-                                    <div className="text-white">Quantity: {item.qty}</div>
+                                    <button onClick={() => decrementQuantity(item.id)} className="px-2 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700 transition duration-300">-</button>
+                                    <div className="text-white">{item.qty}</div>
+                                    <button onClick={() => incrementQuantity(item.id)} className="px-2 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700 transition duration-300">+</button>
                                     <div className="font-semibold text-white">{(item.qty * foundProduct.price).toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</div>
                                 </div>
                                 <div className="flex gap-2">
                                     <button onClick={() => handleRemoveFromCart(item.id)} className="px-3 py-1 rounded-md bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:bg-red-700 transition duration-300">Remove</button>
-                                    <button onClick={() => handleAddToCart(item.id)} className="px-3 py-1 rounded-md bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 transition duration-300">Add</button>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +85,6 @@ const TableCard = () => {
                     <div className="text-white">{totalPrice.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</div>
                 </div>
             )}
-            
         </div>
     );
 };

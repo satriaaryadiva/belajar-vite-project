@@ -31,9 +31,6 @@ const DetailProduct = () => {
                 <div className="text-yellow-400 mb-4">{product.rating.rate}/5 ({product.rating.count} reviews)</div>
                 <p className="text-sm text-gray-300 mb-4">{product.description}</p>
                 <div className="flex space-x-4 mb-6 text-sm font-medium">
-                  <button className="h-10 px-6 font-semibold rounded-md bg-purple-700 text-white hover:bg-purple-600 transition-colors shadow-lg" type="submit">
-                    Buy Now
-                  </button>
                   <button onClick={() => dispatch(addToCart({ id, qty: 1 }))} className="h-10 px-6 font-semibold rounded-md bg-blue-600 text-white hover:bg-blue-500 transition-colors shadow-lg" type="button">
                     Add to Cart
                   </button>
