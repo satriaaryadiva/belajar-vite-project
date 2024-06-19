@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+/* eslint-disable no-undef */
+/** @type {import('tailwindcss', ).Config} */
 export default {
   content: [
     "./index.html",
@@ -7,10 +8,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body : ["Pixelify Sans"],
-        'kanit': ["Kanit"],
-      }
+        body: ["Pixelify Sans"],
+        kanit: ["Kanit"],
+      },
+    },
   },
-  plugins: [],
-}}
-
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
+  variants: {
+    scrollbar: ['rounded'],
+  },
+}

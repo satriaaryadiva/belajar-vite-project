@@ -4,7 +4,7 @@ import { useState } from "react";
 import TableCard from "../fragment/TableCard";
 import NavbarLayout from "../layout/navbarLayout";
 import PaymentModal from "./PaymentModal";
-import {  removeFromCart, updateCartQuantity, selectCartItems } from "../../../redux/slices/cartSlice"; // Import your Redux actions and selectors
+import { removeFromCart, updateCartQuantity, selectCartItems } from "../../../redux/slices/cartSlice";
 
 const DetailCart = ({ products }) => {
   const cart = useSelector(selectCartItems);
@@ -34,9 +34,9 @@ const DetailCart = ({ products }) => {
   };
 
   return (
-    <div className="m-auto max-w-full  max-h-full overflow-auto relative bg-gray-950 flex flex-col">
+    <div className="m-auto max-w-full h-screen relative bg-gray-950 flex flex-col">
       <NavbarLayout>
-        <div className="m-auto max-w-full h-screen bg-gray-950 flex justify-center items-center">
+        <div className="m-auto w-full h-full bg-gray-950 flex justify-center items-center overflow-auto">
           <TableCard
             products={products}
             cart={cart}

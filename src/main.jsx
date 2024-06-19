@@ -1,4 +1,6 @@
+
 // main.jsx or index.jsx
+import Banner from './components/element/fragment/Banner.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -64,7 +66,10 @@ const router = createBrowserRouter([
         <DetailCart />
       </ProtectedRoute>
     )
-  }
+  },{
+    path: 'test',
+    element: <Banner />
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
