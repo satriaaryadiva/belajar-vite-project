@@ -6,6 +6,7 @@ import { MoonLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Banner from "../fragment/Banner";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -50,6 +51,7 @@ const ProductPage = () => {
           </Carousel>
         )}
       </div>
+      <Banner />
 
       <div className="w-full md:w-4/5 lg:w-4/5 mx-auto py-8">
         <h2 className="text-center text-3xl font-bold text-white mb-8">CATALOGUE</h2>
